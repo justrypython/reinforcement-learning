@@ -6,6 +6,7 @@ import os
 import random
 import sys
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 if "../" not in sys.path:
   sys.path.append("../")
@@ -328,7 +329,7 @@ def deep_q_learning(sess,
 
             # Print out which step we're on, useful for debugging.
             print("\rStep {} ({}) @ Episode {}/{}, loss: {}".format(
-                    t, total_t, i_episode + 1, num_episodes, loss), end="")
+                    t, total_t, i_episode + 1, num_episodes, loss))
             sys.stdout.flush()
 
             # Take a step
@@ -377,9 +378,9 @@ def deep_q_learning(sess,
         q_estimator.summary_writer.add_summary(episode_summary, total_t)
         q_estimator.summary_writer.flush()
 
-        yield total_t, plotting.EpisodeStats(
-            episode_lengths=stats.episode_lengths[:i_episode+1],
-            episode_rewards=stats.episode_rewards[:i_episode+1])
+        #yield total_t, plotting.EpisodeStats(
+            #episode_lengths=stats.episode_lengths[:i_episode+1],
+            #episode_rewards=stats.episode_rewards[:i_episode+1])
 
     env.monitor.close()
     return stats
